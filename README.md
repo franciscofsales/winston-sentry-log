@@ -79,7 +79,7 @@ For a full list of Sentry options, please visit <https://docs.sentry.io/clients/
 
 Winston logging levels are mapped by default to Sentry's acceptable levels.
 
-These defaults are set as `options.levelsMap' and are:
+These defaults are set as `options.levelsMap` and are:
 
 ```js
 {
