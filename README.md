@@ -22,8 +22,8 @@ You can configure `winston-sentry-log` in two different ways.
 With `new winston.Logger`:
 
 ```js
-const winston = require("winston");
-const Sentry = require("winston-sentry-log");
+import winston from 'winston';
+import Sentry from 'winston-sentry-log';
 
 const options = {
   dsn: "https://******@sentry.io/12345",
@@ -38,8 +38,8 @@ const logger = new winston.Logger({
 Or with winston's `add` method:
 
 ```js
-const winston = require("winston");
-const Sentry = require("winston-sentry-log");
+import winston from 'winston';
+import Sentry from 'winston-sentry-log';
 
 const logger = new winston.Logger();
 
