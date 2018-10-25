@@ -1,0 +1,1 @@
+# winston-sentry-log
