@@ -7,11 +7,6 @@
 - [Install](#install)
 - [Usage](#usage)
 - [Options](#options-options)
-  - [Default Raven Options](#default-raven-options-optionsconfig)
-  - [Default Error Handler](#default-error-handler-optionserrorhandler)
-  - [Uncaught Exceptions](#uncaught-exceptions)
-  - [Unhandled Promise Rejections](#unhandled-promise-rejections)
-  - [Log Level Mapping](#log-level-mapping)
 - [License](#license)
 
 ## Install
@@ -60,7 +55,6 @@ Per `options` variable above, here are the default options provided:
 Default Sentry options:
 
 - `dsn` (String) - your Sentry DSN or Data Source Name (defaults to `process.env.SENTRY_DSN`)
-- `config` (Object) - a Raven configuration object (see [Default Raven Options](#default-raven-options-optionsconfig) below)
 
 Transport related options:
 
