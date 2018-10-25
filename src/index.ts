@@ -4,7 +4,7 @@ import sentry from "@sentry/node";
 
 import { Context } from "./types";
 
-function errorHandler(err: any) {
+const errorHandler = (err: any) => {
   console.error(err);
 }
 

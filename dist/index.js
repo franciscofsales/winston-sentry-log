@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const lodash_1 = __importDefault(require("lodash"));
 const winston_transport_1 = __importDefault(require("winston-transport"));
 const node_1 = __importDefault(require("@sentry/node"));
-function errorHandler(err) {
+const errorHandler = (err) => {
     console.error(err);
-}
+};
 class Sentry extends winston_transport_1.default {
     constructor(opts) {
         super(opts);
