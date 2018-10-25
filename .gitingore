@@ -1,0 +1,8 @@
+.DS_Store
+.idea
+.vscode
+*.log
+
+.jest
+dist
+node_modules

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["src/index.ts"],"names":[],"mappings":";AAAA,2EAA2E;AAC3E,8DAA8D","sourcesContent":["// We do not export anything by default since we always want to deep import\n// like: import { getGlobalObject } from '@sentry/utils/misc';\n"]}
