@@ -1,5 +1,5 @@
-export type Context = {
-    level?: any,
-    extra?: any,
-    fingerprint?: any
+export interface Context {
+  level?: any;
+  extra?: any;
+  fingerprint?: any;
 }
