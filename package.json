@@ -1,9 +1,13 @@
 {
   "name": "winston-sentry-log",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Winston transport for @Sentry/node",
   "main": "dist/index.js",
   "author": "Francisco Sales",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/franciscofsales/winston-sentry-log"
+  },
   "license": "MIT",
   "keywords": [
     "logger",
