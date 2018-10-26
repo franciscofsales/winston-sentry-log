@@ -1,12 +1,13 @@
-import _ from "lodash";
-import TransportStream from "winston-transport";
-import sentry from "@sentry/node";
+import sentry from '@sentry/node';
+import _ from 'lodash';
+import TransportStream from 'winston-transport';
 
-import { Context } from "./types";
+import { Context } from './types';
 
 const errorHandler = (err: any) => {
+  // tslint:disable-next-line
   console.error(err);
-}
+};
 
 class Sentry extends TransportStream {
   protected name: string;
@@ -15,27 +16,27 @@ class Sentry extends TransportStream {
 
   constructor(opts: any) {
     super(opts);
-    this.name = "winston-sentry-log";
+    this.name = 'winston-sentry-log';
     const options = opts;
 
     _.defaultsDeep(opts, {
-      dsn: process.env.SENTRY_DSN || "",
-      config: {
-        logger: "winston-sentry-log",
-        captureUnhandledRejections: false
-      },
       errorHandler,
-      name: "winston-sentry-log",
+      dsn: process.env.SENTRY_DSN || '',
+      config: {
+        logger: 'winston-sentry-log',
+        captureUnhandledRejections: false,
+      },
+      name: 'winston-sentry-log',
       silent: false,
-      level: "info",
+      level: 'info',
       levelsMap: {
-        silly: "debug",
-        verbose: "debug",
-        info: "info",
-        debug: "debug",
-        warn: "warning",
-        error: "error"
-      }
+        silly: 'debug',
+        verbose: 'debug',
+        info: 'info',
+        debug: 'debug',
+        warn: 'warning',
+        error: 'error',
+      },
     });
 
     this.levelsMap = options.levelsMap;
@@ -51,46 +52,49 @@ class Sentry extends TransportStream {
       options.config.extra = _.defaults(options.config.extra, options.extra);
     }
 
-    this.sentryClient = options.sentryClient || sentry;
+    this.sentryClient = options.sentryClient || require('@sentry/node');
     if (!!this.sentryClient) {
       this.sentryClient.init({
-        dsn: options.dsn
+        dsn: options.dsn,
       });
     }
   }
 
-  log(info: any, callback: any) {
-    const { message, level, fingerprint } = info;
+  public log(info: any, callback: any) {
+    this.sentryClient.init({
+      dsn: process.env.SENTRY_DSN || '',
+    });
+    const { message, fingerprint } = info;
+    const level = Object.keys(this.levelsMap).find(key => info.level.toString().includes(key));
+    if (!level) {
+      return callback(null, true);
+    }
 
-    const meta = Object.assign({}, _.omit(info, ["level", "message", "label"]));
+    const meta = Object.assign({}, _.omit(info, ['level', 'message', 'label']));
     setImmediate(() => {
-      this.emit("logged", level);
+      this.emit('logged', level);
     });
 
     if (!!this.silent) {
       return callback(null, true);
     }
 
-    if (!(level in this.levelsMap)) {
-      return callback(null, true);
-    }
-
     const context: Context = {};
     context.level = this.levelsMap[level];
-    context.extra = _.omit(meta, ["user"]);
+    context.extra = _.omit(meta, ['user']);
     context.fingerprint = [fingerprint, process.env.NODE_ENV];
     this.sentryClient.configureScope((scope: any) => {
-      const user = _.get(meta, "user");
-      if (_.has(context, "extra")) {
-        Object.keys(context.extra).forEach(key => {
+      const user = _.get(meta, 'user');
+      if (_.has(context, 'extra')) {
+        Object.keys(context.extra).forEach((key) => {
           scope.setExtra(key, context.extra[key]);
         });
       }
       if (!!user) {
         scope.setUser(user);
       }
-      if (context.level === "error" || context.level === "fatal") {
-        this.sentryClient.captureException(message);
+      if (context.level === 'error' || context.level === 'fatal') {
+        this.sentryClient.captureException(new Error(message));
         return callback(null, true);
       }
       this.sentryClient.captureMessage(message);
