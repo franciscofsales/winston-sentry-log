@@ -94,7 +94,7 @@ class Sentry extends TransportStream {
         scope.setUser(user);
       }
       if (context.level === 'error' || context.level === 'fatal') {
-        this.sentryClient.captureException(new Error(message));
+        this.sentryClient.captureException(info);
         return callback(null, true);
       }
       this.sentryClient.captureMessage(message);
