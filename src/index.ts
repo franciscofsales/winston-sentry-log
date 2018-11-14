@@ -1,4 +1,5 @@
 import sentry from '@sentry/node';
+import { isError } from '@sentry/utils/is';
 import _ from 'lodash';
 import TransportStream from 'winston-transport';
 
@@ -94,7 +95,7 @@ class Sentry extends TransportStream {
         scope.setUser(user);
       }
       if (context.level === 'error' || context.level === 'fatal') {
-        this.sentryClient.captureException(info instanceof Error ? info : new Error(message));
+        this.sentryClient.captureException(isError(info) ? info : new Error(message));
         return callback(null, true);
       }
       this.sentryClient.captureMessage(message);
