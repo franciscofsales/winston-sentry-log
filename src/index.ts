@@ -12,12 +12,14 @@ const errorHandler = (err: any) => {
 
 class Sentry extends TransportStream {
   protected name: string;
+  protected tags: {[s: string]: any};
   protected sentryClient: typeof sentry;
   protected levelsMap: any;
 
   constructor(opts: any) {
     super(opts);
     this.name = 'winston-sentry-log';
+    this.tags = {};
     const options = opts;
 
     _.defaultsDeep(opts, {
@@ -43,9 +45,9 @@ class Sentry extends TransportStream {
     this.levelsMap = options.levelsMap;
 
     if (options.tags) {
-      options.config.tags = options.tags;
+      this.tags = options.tags;
     } else if (options.globalTags) {
-      options.config.tags = options.globalTags;
+      this.tags = options.globalTags;
     }
 
     if (options.extra) {
@@ -89,6 +91,11 @@ class Sentry extends TransportStream {
       if (_.has(context, 'extra')) {
         Object.keys(context.extra).forEach((key) => {
           scope.setExtra(key, context.extra[key]);
+        });
+      }
+      if (!_.isEmpty(this.tags)) {
+        Object.keys(this.tags).forEach((key) => {
+          scope.setTag(key, this.tags[key]);
         });
       }
       if (!!user) {
