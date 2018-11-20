@@ -60,6 +60,14 @@ class Sentry extends TransportStream {
       this.sentryClient.init({
         dsn: options.dsn,
       });
+
+      this.sentryClient.configureScope((scope: any) => {
+        if (!_.isEmpty(this.tags)) {
+          Object.keys(this.tags).forEach((key) => {
+            scope.setTag(key, this.tags[key]);
+          });
+        }
+      });
     }
   }
 
