@@ -1,7 +1,7 @@
 import sentry from '@sentry/node';
 import { isError } from '@sentry/utils/is';
 import _ from 'lodash';
-import TransportStream from 'winston-transport';
+import TransportStream = require('winston-transport');
 
 import { Context } from './types';
 
@@ -10,7 +10,7 @@ const errorHandler = (err: any) => {
   console.error(err);
 };
 
-export class Sentry extends TransportStream {
+export default class Sentry extends TransportStream {
   protected name: string;
   protected tags: {[s: string]: any};
   protected sentryClient: typeof sentry;
@@ -117,5 +117,3 @@ export class Sentry extends TransportStream {
     });
   }
 }
-
-module.exports = Sentry;
