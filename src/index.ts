@@ -24,8 +24,8 @@ export class Sentry extends TransportStream {
 
     _.defaultsDeep(opts, {
       errorHandler,
-      dsn: process.env.SENTRY_DSN || '',
       config: {
+        dsn: process.env.SENTRY_DSN || '',
         logger: 'winston-sentry-log',
         captureUnhandledRejections: false,
       },
@@ -48,6 +48,8 @@ export class Sentry extends TransportStream {
       this.tags = options.tags;
     } else if (options.globalTags) {
       this.tags = options.globalTags;
+    } else if (options.config.tags) {
+      this.tags = options.config.tags;
     }
 
     if (options.extra) {
@@ -57,8 +59,8 @@ export class Sentry extends TransportStream {
 
     this.sentryClient = options.sentryClient || require('@sentry/node');
     if (!!this.sentryClient) {
-      this.sentryClient.init({
-        dsn: options.dsn,
+      this.sentryClient.init(options.config || {
+        dsn: process.env.SENTRY_DSN || '',
       });
 
       this.sentryClient.configureScope((scope: any) => {
@@ -72,9 +74,6 @@ export class Sentry extends TransportStream {
   }
 
   public log(info: any, callback: any) {
-    this.sentryClient.init({
-      dsn: process.env.SENTRY_DSN || '',
-    });
     const { message, fingerprint } = info;
     const level = Object.keys(this.levelsMap).find(key => info.level.toString().includes(key));
     if (!level) {
@@ -94,7 +93,7 @@ export class Sentry extends TransportStream {
     context.level = this.levelsMap[level];
     context.extra = _.omit(meta, ['user']);
     context.fingerprint = [fingerprint, process.env.NODE_ENV];
-    this.sentryClient.configureScope((scope: any) => {
+    this.sentryClient.configureScope((scope: sentry.Scope) => {
       const user = _.get(meta, 'user');
       if (_.has(context, 'extra')) {
         Object.keys(context.extra).forEach((key) => {
