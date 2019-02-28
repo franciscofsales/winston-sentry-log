@@ -117,3 +117,5 @@ export default class Sentry extends TransportStream {
     });
   }
 }
+
+module.exports = Sentry;

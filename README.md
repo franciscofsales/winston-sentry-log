@@ -30,7 +30,7 @@ const options = {
   level: "info"
 };
 
-const logger = new winston.Logger({
+const logger = new winston.createLogger({
   transports: [new Sentry(options)]
 });
 ```
@@ -41,7 +41,7 @@ Or with winston's `add` method:
 import winston from 'winston';
 import Sentry from 'winston-sentry-log';
 
-const logger = new winston.Logger();
+const logger = new winston.createLogger();
 
 logger.add(Sentry, options);
 ```
