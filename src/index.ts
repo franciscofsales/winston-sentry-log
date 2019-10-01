@@ -112,7 +112,7 @@ export default class Sentry extends TransportStream {
         this.sentryClient.captureException(isError(info) ? info : new Error(message));
         return callback(null, true);
       }
-      this.sentryClient.captureMessage(message);
+      this.sentryClient.captureMessage(message, context.level);
       return callback(null, true);
     });
   }
