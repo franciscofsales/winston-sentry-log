@@ -1,5 +1,5 @@
 import sentry from '@sentry/node';
-import { isError } from '@sentry/utils/is';
+import { isError } from '@sentry/utils';
 import _ from 'lodash';
 import TransportStream = require('winston-transport');
 
