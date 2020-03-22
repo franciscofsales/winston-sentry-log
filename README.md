@@ -63,6 +63,12 @@ Transport related options:
 - `level` (String) - transport's level of messages to log (defaults to `info`)
 - `levelsMap` (Object) - log level mapping to Sentry (see [Log Level Mapping](#log-level-mapping) below)
 
+### Sentry Client
+
+- `sentryClient` (Sentry) - the custom sentry client (defaults to `require('@sentry/node')`)
+- `initializeClient` (boolean) - whether to initialize the provided sentry client or not (defaults to `true`)
+  - Has effect only if custom `sentryClient` was provided, otherwise internal `sentryClient` will be always initialized
+
 ### Default Sentry Options (`options.config`)
 
 - `logger` (String) - defaults to `winston-sentry-log`
