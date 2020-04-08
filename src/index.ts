@@ -1,5 +1,4 @@
 import sentry from '@sentry/node';
-import { isError } from '@sentry/utils/is';
 import _ from 'lodash';
 import TransportStream = require('winston-transport');
 
@@ -12,7 +11,7 @@ const errorHandler = (err: any) => {
 
 export default class Sentry extends TransportStream {
   protected name: string;
-  protected tags: {[s: string]: any};
+  protected tags: { [s: string]: any };
   protected sentryClient: typeof sentry;
   protected levelsMap: any;
 
@@ -110,7 +109,7 @@ export default class Sentry extends TransportStream {
       }
       if (context.level === 'error' || context.level === 'fatal') {
         let err = null;
-        if (isError(info) === true) {
+        if (_.isError(info) === true) {
           err = info;
         } else {
           err = new Error(message);
