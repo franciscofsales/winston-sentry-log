@@ -26,7 +26,9 @@ import winston from 'winston';
 import Sentry from 'winston-sentry-log';
 
 const options = {
-  dsn: "https://******@sentry.io/12345",
+  config: {
+    dsn: "https://******@sentry.io/12345"
+  },
   level: "info"
 };
 
