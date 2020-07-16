@@ -68,12 +68,6 @@ export default class Sentry extends TransportStream {
     }
 
     if (!!this.sentryClient) {
-      this.sentryClient.init(options.config || {
-        dsn: process.env.SENTRY_DSN || '',
-      });
-    }
-
-    if (!!this.sentryClient) {
       this.sentryClient.configureScope((scope: any) => {
         if (!_.isEmpty(this.tags)) {
           Object.keys(this.tags).forEach((key) => {
