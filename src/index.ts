@@ -28,7 +28,7 @@ export default class Sentry extends TransportStream {
         logger: 'winston-sentry-log',
         captureUnhandledRejections: false,
       },
-      isClientInitalized: false,
+      isClientInitialized: false,
       level: 'info',
       levelsMap: {
         silly: 'debug',
@@ -59,7 +59,7 @@ export default class Sentry extends TransportStream {
 
     this.sentryClient = options.sentryClient;
 
-    if (!options.isClientInitalized) {
+    if (!options.isClientInitialized) {
       this.sentryClient = this.sentryClient || require('@sentry/node');
 
       this.sentryClient.init(options.config || {
