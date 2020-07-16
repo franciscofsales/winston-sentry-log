@@ -64,13 +64,9 @@ Transport related options:
 - `silent` (Boolean) - suppress logging (defaults to `false`)
 - `level` (String) - transport's level of messages to log (defaults to `info`)
 - `levelsMap` (Object) - log level mapping to Sentry (see [Log Level Mapping](#log-level-mapping) below)
-
-### Sentry Client
-
 - `sentryClient` (Sentry) - the custom sentry client (defaults to `require('@sentry/node')`)
-- `initializeClient` (boolean) - whether to initialize the provided sentry client or not (defaults to `true`)
-  - Has effect only if custom `sentryClient` was provided, otherwise internal `sentryClient` will be always initialized
-
+- `isClientInitialized` (boolean) - whether to initialize the provided sentry client or not (defaults to `false`)
+  - If `isClientInitialized` is set to true, a custom `sentryClient` initialized must provided, otherwise internal `sentryClient` will not initialized
 ### Default Sentry Options (`options.config`)
 
 - `logger` (String) - defaults to `winston-sentry-log`
