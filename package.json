@@ -1,6 +1,6 @@
 {
   "name": "winston-sentry-log",
-  "version": "1.0.12",
+  "version": "1.0.16",
   "description": "Winston transport for @Sentry/node",
   "main": "dist/index.js",
   "author": "Francisco Sales",
@@ -27,9 +27,9 @@
     "node": ">= 6.4.0"
   },
   "dependencies": {
-    "@sentry/node": "^5.15.0",
-    "lodash": "^4.17.15",
-    "winston-transport": "^4.3.0"
+    "@sentry/node": "5.15.5",
+    "lodash": "4.17.15",
+    "winston-transport": "4.3.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.121",

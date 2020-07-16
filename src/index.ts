@@ -1,5 +1,4 @@
 import sentry from '@sentry/node';
-import { isError } from '@sentry/utils';
 import _ from 'lodash';
 import TransportStream = require('winston-transport');
 
@@ -12,7 +11,7 @@ const errorHandler = (err: any) => {
 
 export default class Sentry extends TransportStream {
   protected name: string;
-  protected tags: {[s: string]: any};
+  protected tags: { [s: string]: any };
   protected sentryClient: typeof sentry;
   protected levelsMap: any;
 
@@ -115,7 +114,16 @@ export default class Sentry extends TransportStream {
         scope.setUser(user);
       }
       if (context.level === 'error' || context.level === 'fatal') {
-        this.sentryClient.captureException(isError(info) ? info : new Error(message));
+        let err = null;
+        if (_.isError(info) === true) {
+          err = info;
+        } else {
+          err = new Error(message);
+          if (info.stack) {
+            err.stack = info.stack;
+          }
+        }
+        this.sentryClient.captureException(err);
         return callback(null, true);
       }
       this.sentryClient.captureMessage(message, context.level);
