@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@sentry/node": "5.15.5",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "winston-transport": "4.3.0"
   },
   "devDependencies": {
