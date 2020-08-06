@@ -19,7 +19,7 @@ yarn add winston winston-sentry-log
 
 You can configure `winston-sentry-log` in two different ways.
 
-With `new winston.Logger`:
+With `winston.createLogger`:
 
 ```js
 import winston from 'winston';
@@ -32,7 +32,7 @@ const options = {
   level: "info"
 };
 
-const logger = new winston.createLogger({
+const logger = winston.createLogger({
   transports: [new Sentry(options)]
 });
 ```
@@ -43,7 +43,7 @@ Or with winston's `add` method:
 import winston from 'winston';
 import Sentry from 'winston-sentry-log';
 
-const logger = new winston.createLogger();
+const logger = winston.createLogger();
 
 logger.add(Sentry, options);
 ```
