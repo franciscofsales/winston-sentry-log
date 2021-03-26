@@ -96,23 +96,26 @@ export default class Sentry extends TransportStream {
 
     const context: Context = {};
     context.level = this.levelsMap[level];
-    context.extra = _.omit(meta, ['user']);
+    context.extra = _.omit(meta, ['user', 'tags']);
     context.fingerprint = [fingerprint, process.env.NODE_ENV];
-    this.sentryClient.configureScope((scope: sentry.Scope) => {
+    this.sentryClient.withScope((scope: sentry.Scope) => {
       const user = _.get(meta, 'user');
       if (_.has(context, 'extra')) {
         Object.keys(context.extra).forEach((key) => {
           scope.setExtra(key, context.extra[key]);
         });
       }
-      if (!_.isEmpty(this.tags)) {
-        Object.keys(this.tags).forEach((key) => {
-          scope.setTag(key, this.tags[key]);
+
+      if (!_.isEmpty(meta.tags) && _.isObject(meta.tags)) {
+        Object.keys(meta.tags).forEach((key) => {
+          scope.setTag(key, meta.tags[key]);
         });
       }
+
       if (!!user) {
         scope.setUser(user);
       }
+
       if (context.level === 'error' || context.level === 'fatal') {
         let err = null;
         if (_.isError(info) === true) {
