@@ -5,7 +5,7 @@ import TransportStream = require('winston-transport');
 import { Context } from './types';
 
 const errorHandler = (err: any) => {
-  // tslint:disable-next-line
+  // eslint-disable-next-line
   console.error(err);
 };
 

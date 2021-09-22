@@ -174,14 +174,6 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.21.tgz#afcf913437eeb1f9e1994a62a03b1762ee4600d3"
   integrity sha512-fLwcSjMmDnjfk4FP7/QDiNzXSCEOGNvEe9eA6vaITmC784+Gm70wF7woaFQxUb2CpMjgLBhSPyhH0oIe1JS2uw==
 
-"@typescript-eslint/eslint-plugin-tslint@^4.31.2":
-  version "4.31.2"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin-tslint/-/eslint-plugin-tslint-4.31.2.tgz#d66f677076a8a310be19527cbb1f1fa9f9c09e81"
-  integrity sha512-ZagxTSl4V7z0TvE50YqEQO2JjNBZ4pTkjQKocyHhikqGiEPU6nssgkXXU9slH9N+Ca4gLSi68T6T7/syd2/HXQ==
-  dependencies:
-    "@typescript-eslint/experimental-utils" "4.31.2"
-    lodash "^4.17.21"
-
 "@typescript-eslint/eslint-plugin@^4.31.2":
   version "4.31.2"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.31.2.tgz#9f41efaee32cdab7ace94b15bd19b756dd099b0a"

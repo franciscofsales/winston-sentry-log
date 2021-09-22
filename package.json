@@ -36,7 +36,6 @@
     "@types/lodash": "^4.14.173",
     "@types/node": "^11.9.6",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
-    "@typescript-eslint/eslint-plugin-tslint": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
     "eslint": "^7.32.0",
     "eslint-plugin-jsdoc": "^36.1.0",
