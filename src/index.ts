@@ -78,7 +78,7 @@ export default class Sentry extends TransportStream {
     }
   }
 
-  public log(info: any, callback: any) {
+  public log(info: any, callback: any): ((a: null, b: boolean) => unknown) | undefined {
     const { message, fingerprint } = info;
     const level = Object.keys(this.levelsMap).find(key => info.level.toString().includes(key));
     if (!level) {
@@ -132,6 +132,7 @@ export default class Sentry extends TransportStream {
       this.sentryClient.captureMessage(message, context.level);
       return callback(null, true);
     });
+    return undefined;
   }
 }
 
