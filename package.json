@@ -20,7 +20,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "NODE_ENV=development tsc-watch --onSuccess \"node dist/index.js\"",
-    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "lint": "eslint .",
     "prepublish": "npm run build",
     "start": "node dist/index.js"
   },
@@ -35,11 +35,13 @@
   "devDependencies": {
     "@types/lodash": "^4.14.173",
     "@types/node": "^11.9.6",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/parser": "^4.31.2",
+    "eslint": "^7.32.0",
+    "eslint-plugin-jsdoc": "^36.1.0",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
     "ts-node": "^8.0.2",
     "tsc-watch": "^2.1.2",
-    "tslint": "^5.13.0",
-    "tslint-config-airbnb": "^5.11.1",
-    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.3.3333",
     "winston": "^3.3.3"
   }

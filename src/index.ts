@@ -5,7 +5,7 @@ import TransportStream = require('winston-transport');
 import { Context } from './types';
 
 const errorHandler = (err: any) => {
-  // tslint:disable-next-line
+  // eslint-disable-next-line
   console.error(err);
 };
 
@@ -118,7 +118,7 @@ export default class Sentry extends TransportStream {
 
       if (context.level === 'error' || context.level === 'fatal') {
         let err = null;
-        if (_.isError(info) === true) {
+        if (_.isError(info)) {
           err = info;
         } else {
           err = new Error(message);
