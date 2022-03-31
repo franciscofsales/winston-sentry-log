@@ -9,7 +9,7 @@ const errorHandler = (err: any) => {
   console.error(err);
 };
 
-export default class Sentry extends TransportStream {
+class Sentry extends TransportStream {
   protected name: string;
   protected tags: { [s: string]: any };
   protected sentryClient: typeof sentry;
@@ -136,4 +136,4 @@ export default class Sentry extends TransportStream {
   }
 }
 
-module.exports = Sentry;
+export = Sentry;
