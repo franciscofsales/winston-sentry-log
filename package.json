@@ -1,6 +1,6 @@
 {
   "name": "winston-sentry-log",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "Winston transport for @sentry/node",
   "main": "dist/index.js",
   "author": "Francisco Sales",
